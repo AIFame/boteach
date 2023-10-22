@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "boteach"
+version = "0.1.0"
+description = "QA bot assist for slow learners"
+authors = ["Hiro <laciferin@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+langchain = "^0.0.320"
+streamlit = "^1.27.2"
+transformers = "^4.34.1"
+wikipedia = "^1.4.0"
+torch = "^2.1.0"
+pydantic = "^2.4.2"
+deeplake = "^3.8.2"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
