@@ -32,3 +32,4 @@ OPENAI_CHAT_MODEL: Final[str] = os.getenv(
 ).strip()
 
 VIDEO_PATH: Final = os.path.join("data", "Neurons and the brain.mp4")
+VIDEO_TRANSCRIPT_PATH: Final = os.path.join("data", "Neurons and the brain.vtt")

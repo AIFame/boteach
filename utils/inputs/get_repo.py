@@ -6,7 +6,7 @@ import tempfile
 from langchain.docstore.document import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
-from config.constants import VIDEO_PATH
+from config.constants import VIDEO_PATH, VIDEO_TRANSCRIPT_PATH
 
 
 def get_github_docs(repo_owner, repo_name):
@@ -45,8 +45,8 @@ def get_text_chunk(text) -> [Document]:
     return docs
 
 
-def get_video_transcript() -> [Document]:
-    with open(VIDEO_PATH, "r") as f1:
+def get_video_transcript(transcript: str = VIDEO_TRANSCRIPT_PATH) -> [Document]:
+    with open(transcript, "r") as f1:
         docs = get_text_chunk(f1.read())
         return docs
         # return Document(page_content=f1.read(), metadata={"source": VIDEO_PATH})
