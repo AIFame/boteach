@@ -30,3 +30,5 @@ OPENAI_CHAT_MODEL: Final[str] = os.getenv(
     "OPENAI_CHAT_MODEL",
     "gpt-3.5-turbo",
 ).strip()
+
+VIDEO_PATH: Final = os.path.join("data", "Neurons and the brain.mp4")

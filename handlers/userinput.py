@@ -1,8 +1,6 @@
 import streamlit as st
-import ast
-from public import tpl_bot, tpl_user
 
-from .audio import handle_text_2_speech
+from public import tpl_bot
 
 
 def handle_userinput(user_question):

@@ -5,7 +5,7 @@ from langchain.embeddings import OpenAIEmbeddings
 from langchain.vectorstores.pinecone import Pinecone
 
 from config import open_ai, pinecone
-from config.constants import INDEX_NAME
+from config.constants import INDEX_NAME, VIDEO_PATH
 from utils.ai.open_ai import create_or_get_conversation_chain
 
 import streamlit as st
@@ -14,7 +14,7 @@ import streamlit as st
 @dataclass
 class App:
     start_time: int = 0
-    video = os.path.join("data", "Neurons and the brain.mp4")
+    video = VIDEO_PATH
 
     def __post_init__(self):
         open_ai.setup()

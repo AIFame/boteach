@@ -13,29 +13,7 @@ from langchain.vectorstores import Pinecone
 
 from config.constants import INDEX_NAME, OPENAI_CHAT_MODEL, OPENAI_EMBEDDINGS_LLM
 from database import pinecone_db
-from utils.inputs.get_repo import get_github_docs
-
-
-def get_text_chunk():
-    # use text_splitter to split it into documents list
-    sources = get_github_docs('mertbozkir', 'docs-example')
-    source_chunks = []
-
-    md_splitter = RecursiveCharacterTextSplitter.from_language(
-        language=Language.MARKDOWN, chunk_size=1024, chunk_overlap=0,
-    )
-
-    for source in sources:
-        for chunk in md_splitter.split_text(source.page_content):
-            source_chunks.append(
-                Document(page_content=chunk, metadata=source.metadata),
-            )
-
-    print(
-        f'source_chunks length is {len(source_chunks)} and type of each source_chunks is {type(source_chunks[0])}',
-    )
-
-    return source_chunks
+from utils.inputs.get_repo import get_github_docs, get_video_transcript
 
 
 def upsert(data) -> Pinecone:
@@ -54,14 +32,28 @@ def upsert(data) -> Pinecone:
     return vectorstore
 
 
+def get_text_chunk(text):
+    # use text_splitter to split it into documents list
+    text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size=1000,
+        chunk_overlap=0,
+    )
+    chunks = text_splitter.split_text(text)
+
+    # (variable) docs: List[Document]
+    docs = [Document(page_content=text) for text in chunks]
+    return docs
+
+
 def create_or_get_conversation_chain(vectorstore):
     template = """
         Return results as markdown code?
     """
-    #llm = ChatOpenAI(model=OPENAI_CHAT_MODEL)
+    # llm = ChatOpenAI(model=OPENAI_CHAT_MODEL)
     llm = ChatOpenAI()
     memory = ConversationBufferMemory(
-        memory_key='chat_history', return_messages=True,
+        memory_key="chat_history",
+        return_messages=True,
     )
     prompt_template = PromptTemplate.from_template(template)
 
