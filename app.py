@@ -45,7 +45,6 @@ st.title("Learning Video with Question Answering")
 
 # Display the video
 video_url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-video_player.play(video_url)
 
 # Ask the user a question about the video
 question = st.text_input("Ask a question about the video:")
