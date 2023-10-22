@@ -1,0 +1,2 @@
+# boteach
+Do all people learn at the same pace? Obviously not. Are there some people who are academically challenged? Certainly yes. In Boteach, slow-paced learners are the target. In our platform, we offer a bot, we consider him the smartest study comrade, who can explain study concepts, answer inquiries, and repeat perplexing concepts. By then, students' academic failire diminishes and we facilitate both teach and learning for teachers and students. Also, we cut the costs for tutors, who might not offer the same quality and clarity as Boteach
