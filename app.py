@@ -4,6 +4,7 @@ import streamlit as st
 
 from enums.app import App
 from handlers.userinput import handle_userinput
+from public import tpl_bot
 from views.sidebar import sidebar
 
 st.set_page_config(
@@ -22,7 +23,7 @@ if not app:
 
 st.video(app.video, start_time=app.start_time)
 
-sidebar()
+# sidebar() TODO:
 
 if "conversation" not in st.session_state:
     st.session_state.conversation = None
@@ -33,7 +34,19 @@ st.header(" Q/A assistant for slow learners")
 user_question = st.text_input("Ask a question about the video:")
 
 if user_question:
-    handle_userinput(user_question)
+    # handle_userinput(user_question)
+    response = app.chain({"question": user_question})
+    chat_history_list = response["chat_history"]
+    print(f"response: {response}")
+    message = chat_history_list[-1].content
+    print(f"message: {message}")
+    st.write(
+        tpl_bot.replace(
+            "{{MSG}}",
+            message,
+        ),
+        unsafe_allow_html=True,
+    )
 
 
 # Define a function to answer a question about a video

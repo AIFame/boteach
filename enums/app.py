@@ -2,6 +2,9 @@ import os
 from dataclasses import dataclass
 
 from icecream import ic
+from langchain.chains.conversational_retrieval.base import (
+    BaseConversationalRetrievalChain,
+)
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.vectorstores.pinecone import Pinecone
 
@@ -18,6 +21,7 @@ from utils.inputs.get_repo import get_video_transcript
 class App:
     start_time: int = 0
     video = VIDEO_PATH
+    chain: BaseConversationalRetrievalChain = None
 
     def __post_init__(self):
         open_ai.setup()
@@ -29,7 +33,7 @@ class App:
             embedding=embeddings,
         )
 
-        st.session_state.conversation = create_or_get_conversation_chain(
+        self.chain = create_or_get_conversation_chain(
             vectorstore,
         )
 

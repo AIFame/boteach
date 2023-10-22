@@ -8,14 +8,14 @@ def handle_userinput(user_question):
     chat_history_list = response["chat_history"]
 
     # Extract content from each message object
-    for i, message in enumerate(chat_history_list):
-        st.session_state.chat_history.insert(i, message.content)
-    # only keep the latest 12 chat history
-    if len(st.session_state.chat_history) >= 12:
-        st.session_state.chat_history = st.session_state.chat_history[:-2]
-
-    chat_history = st.session_state.chat_history
-    print(f"length of chat_history is {len(chat_history)}")
+    # for i, message in enumerate(chat_history_list):
+    #     st.session_state.chat_history.insert(i, message.content)
+    # # only keep the latest 12 chat history
+    # if len(st.session_state.chat_history) >= 12:
+    #     st.session_state.chat_history = st.session_state.chat_history[:-2]
+    #
+    # chat_history = st.session_state.chat_history
+    # print(f"length of chat_history is {len(chat_history)}")
     # for i, message in enumerate(chat_history):
     #     if i % 2 == 0:  # User's message
     #         print(f'User question is {message}')
@@ -30,7 +30,9 @@ def handle_userinput(user_question):
     #                 '{{MSG}}', message,
     #             ), unsafe_allow_html=True,
     #         )
-    message = chat_history[-1]
+
+    print(f"message: {response}")
+    message = response
     st.write(
         tpl_bot.replace(
             "{{MSG}}",

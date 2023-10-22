@@ -45,7 +45,7 @@ def get_text_chunk(text):
     return docs
 
 
-def create_or_get_conversation_chain(vectorstore):
+def create_or_get_conversation_chain(vectorstore) -> BaseConversationalRetrievalChain:
     template = """
         Return results as markdown code?
     """
