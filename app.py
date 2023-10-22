@@ -1,18 +1,17 @@
 import logging
-import os.path
-from dataclasses import dataclass
 
 import streamlit as st
-import numpy as np
-import pandas as pd
-import io
-from PIL import Image
 
+from enums.app import App
+from handlers.userinput import handle_userinput
+from views.sidebar import sidebar
 
-@dataclass
-class App:
-    start_time: int = 0
+st.set_page_config(
+    page_title="Boteach",
+    page_icon=":books:",
+)
 
+st.title("Botech")
 
 app: App = st.session_state.get("app")
 
@@ -21,14 +20,21 @@ if not app:
     logging.info("creating new app instance")
     st.session_state.app = app
 
-qa_model = None
+st.video(app.video, start_time=app.start_time)
 
-st.title("Botech: Q/A assistant for slow learners")
+sidebar()
 
-video = os.path.join("data", "Neurons and the brain.mp4")
+if "conversation" not in st.session_state:
+    st.session_state.conversation = None
+if "chat_history" not in st.session_state:
+    st.session_state.chat_history = []
 
+st.header(" Q/A assistant for slow learners")
+user_question = st.text_input("Ask a question about the video:")
 
-st.video(video, start_time=app.start_time)
+if user_question:
+    handle_userinput(user_question)
+
 
 # Define a function to answer a question about a video
 # def answer_question(question, video_url):
@@ -47,7 +53,6 @@ st.video(video, start_time=app.start_time)
 # Display the video
 
 # Ask the user a question about the video
-question = st.text_input("Ask a question about the video:")
 
 # Answer the question and display the video snip
 # if question:
