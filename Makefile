@@ -15,6 +15,10 @@ install:
 	@pip install poetry
 	@poetry install --no-root
 
+gh: 
+	make install
+	make run
+
 run:
   # @source venv/bin/activate
 	# @python -m streamlit run app.py
