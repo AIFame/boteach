@@ -1,6 +1,7 @@
 import logging
 
 import streamlit as st
+from langchain.embeddings import OpenAIEmbeddings
 
 from enums.app import App
 from handlers.userinput import handle_userinput
@@ -47,6 +48,8 @@ if user_question:
         ),
         unsafe_allow_html=True,
     )
+
+    OpenAIEmbeddings()
 
 
 # Define a function to answer a question about a video
