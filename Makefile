@@ -16,6 +16,7 @@ install:
 	@poetry install --no-root
 
 gh: 
+	git pull
 	make install
 	make run
 
