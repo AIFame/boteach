@@ -31,6 +31,7 @@ class App:
         vectorstore = Pinecone.from_existing_index(
             index_name=INDEX_NAME,
             embedding=embeddings,
+            # namespace=TODO:
         )
 
         self.chain = create_or_get_conversation_chain(
