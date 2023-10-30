@@ -258,3 +258,4 @@ Let's now dive more deeply into
 the details of how neural network actually works.
 Please go on to the next video.
 
+
