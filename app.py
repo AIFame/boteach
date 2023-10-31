@@ -4,9 +4,7 @@ import streamlit as st
 from langchain.embeddings import OpenAIEmbeddings
 
 from enums.app import App
-from handlers.userinput import handle_userinput
 from public import tpl_bot
-from views.sidebar import sidebar
 
 st.set_page_config(
     page_title="Boteach",
