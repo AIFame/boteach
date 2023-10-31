@@ -19,6 +19,10 @@ from utils.inputs.get_repo import get_video_transcript
 
 @dataclass
 class App:
+    """
+    app: state
+    """
+
     start_time: int = 0
     video = VIDEO_PATH
     chain: BaseConversationalRetrievalChain = None
