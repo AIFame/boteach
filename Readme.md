@@ -35,4 +35,6 @@ Students classified to
 5. MVP v0.5
     - Teacher Dashboard (see the video list, viewers etc)  Implementation: look for open source dashboards - PowerBI
 
+6. MVP v0.6
+   - AI Avatars powered by https://elevenlabs.io or https://studio.inworld.ai/
 ......
