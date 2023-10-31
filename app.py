@@ -47,8 +47,6 @@ if user_question:
         unsafe_allow_html=True,
     )
 
-    OpenAIEmbeddings()
-
 
 # Define a function to answer a question about a video
 # def answer_question(question, video_url):
