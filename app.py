@@ -29,7 +29,7 @@ if "conversation" not in st.session_state:
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
 
-st.header(" Q/A assistant for slow learners")
+st.header("Q/A Genie") #FIXME:
 user_question = st.text_input("Ask a question about the video:")
 
 if user_question:
