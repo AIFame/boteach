@@ -54,6 +54,12 @@ if user_question:
         # )
         st.write(message)
 
+        st.write("Here is the video snip that should clarify your doubts")
+        app.start_time = 1
+        st.video(app.video, start_time=app.start_time)
+
+
+
 
 # Define a function to answer a question about a video
 # def answer_question(question, video_url):
