@@ -32,20 +32,27 @@ if "chat_history" not in st.session_state:
 st.header("Q/A Genie") # FIXME:
 user_question = st.text_input("Ask a question about the video:")
 
+
+
 if user_question:
     # handle_userinput(user_question)
-    response = app.chain({"question": user_question})
-    chat_history_list = response["chat_history"]
-    print(f"response: {response}")
-    message = chat_history_list[-1].content
-    print(f"message: {message}")
-    st.write(
-        tpl_bot.replace(
-            "{{MSG}}",
-            message,
-        ),
-        unsafe_allow_html=True,
-    )
+
+    with st.spinner("LLM Working"):
+        response = app.chain({"question": user_question})
+
+    with st.chat_message("ai", avatar="assistant"):
+        chat_history_list = response["chat_history"]
+        print(f"response: {response}")
+        message = chat_history_list[-1].content
+        print(f"message: {message}")
+        # st.write(
+        #     tpl_bot.replace(
+        #         "{{MSG}}",
+        #         message,
+        #     ),
+        #     unsafe_allow_html=True,
+        # )
+        st.write(message)
 
 
 # Define a function to answer a question about a video
