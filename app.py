@@ -1,4 +1,5 @@
 import logging
+import random
 
 import streamlit as st
 from langchain.embeddings import OpenAIEmbeddings
@@ -55,7 +56,7 @@ if user_question:
         st.write(message)
 
         st.write("Here is the video snip that should clarify your doubts")
-        app.start_time = 1
+        app.start_time = random.randint(1,600) #FIXME:
         st.video(app.video, start_time=app.start_time)
 
 
