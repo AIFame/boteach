@@ -1,5 +1,4 @@
 from icecream import ic
-from langchain import PromptTemplate
 from langchain.chains import ConversationalRetrievalChain
 from langchain.chains.conversational_retrieval.base import (
     BaseConversationalRetrievalChain,
@@ -7,6 +6,7 @@ from langchain.chains.conversational_retrieval.base import (
 from langchain.chat_models import ChatOpenAI
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.memory import ConversationBufferMemory
+from langchain.prompts import PromptTemplate
 from langchain.schema import Document
 from langchain.text_splitter import Language, RecursiveCharacterTextSplitter
 from langchain.vectorstores import Pinecone
