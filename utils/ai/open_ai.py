@@ -13,7 +13,7 @@ from langchain.vectorstores import Pinecone
 
 from config.constants import INDEX_NAME, OPENAI_CHAT_MODEL, OPENAI_EMBEDDINGS_LLM
 from database import pinecone_db
-from utils.inputs.get_repo import get_github_docs, get_video_transcript
+from utils.inputs.get_repo import  get_video_transcript
 
 
 def upsert(data) -> Pinecone:
