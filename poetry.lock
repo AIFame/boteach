@@ -1233,6 +1233,17 @@ files = [
 cli = ["click (>=5.0)"]
 
 [[package]]
+name = "pytube"
+version = "15.0.0"
+description = "Python 3 library for downloading YouTube Videos."
+optional = false
+python-versions = ">=3.7"
+files = [
+    { file = "pytube-15.0.0-py3-none-any.whl", hash = "sha256:07b9904749e213485780d7eb606e5e5b8e4341aa4dccf699160876da00e12d78" },
+    { file = "pytube-15.0.0.tar.gz", hash = "sha256:076052efe76f390dfa24b1194ff821d4e86c17d41cb5562f3a276a8bcbfc9d1d" },
+]
+
+[[package]]
 name = "pytz"
 version = "2023.3.post1"
 description = "World timezone definitions, modern and historical"
@@ -1806,6 +1817,20 @@ files = [
 watchmedo = ["PyYAML (>=3.10)"]
 
 [[package]]
+name = "youtube-transcript-api"
+version = "0.6.1"
+description = "This is an python API which allows you to get the transcripts/subtitles for a given YouTube video. It also works for automatically generated subtitles, supports translating subtitles and it does not require a headless browser, like other selenium based solutions do!"
+optional = false
+python-versions = "*"
+files = [
+    { file = "youtube_transcript_api-0.6.1-py3-none-any.whl", hash = "sha256:f0ce9c8475953c108d3cbfda0426dc35f195638bf841837968530d300c6c7ec5" },
+    { file = "youtube_transcript_api-0.6.1.tar.gz", hash = "sha256:bc148ea687af7d8e80853d4cd005c7d28859106a5eb5501722fd3dac9f9b68be" },
+]
+
+[package.dependencies]
+requests = "*"
+
+[[package]]
 name = "zipp"
 version = "3.17.0"
 description = "Backport of pathlib-compatible object wrapper for zip files"
@@ -1823,4 +1848,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "87c2706d3fa6c0cebfe32901d8f00f30dbf67504b4e0b22c018d2b13f4c1cfcc"
+content-hash = "de0bcd74239ce38f126b1efda9bb2ba3920b79ffd898865b61361077a89e26b6"
