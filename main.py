@@ -22,11 +22,12 @@ if api_key:
 st.title("Botech")
 
 app: App = st.session_state.get("app")
-
+app = None  # FIXME
 if not app:
     app = App()
     logging.info("creating new app instance")
     st.session_state.app = app
+
 
 st.video(app.video, start_time=app.start_time)
 
