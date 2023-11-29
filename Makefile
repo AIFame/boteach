@@ -10,8 +10,6 @@ activate:
 	source $(poetry env info --path)/bin/activate
 
 install:
-	# @ pip install --upgrade pip
-	# @ pip install -r requirements.txt
 	@pip install poetry
 	@poetry install --no-root
 
@@ -42,13 +40,13 @@ clean:
 	@find . -type f -name '*.log' -exec rm -f {} +
 
 docker:
-	docker build -t  decenter.streamlit.app .
+	docker build -t  boteach .
 
 .PHONY: run install clean setup test activate docker
 
 poetry-export:
 	poetry export --with dev --format requirements.txt --output requirements-poetry.txt
 
-export:
+conda-export:
 	conda env export --name ml > environment.yml export
 
