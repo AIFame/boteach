@@ -1,8 +1,20 @@
 import logging
 
+import pytube
 import streamlit as st
+from pytube import YouTube
 
 from enums.app import App
+
+
+def is_valid_youtube_url(url):
+    try:
+        YouTube(url)
+        return True
+    except Exception as e:
+        logging.exception(f"youtube url {e.__str__()}")
+        return False
+
 
 st.set_page_config(
     page_title="Boteach",
@@ -26,6 +38,13 @@ if not app:
     logging.info("creating new app instance")
     st.session_state.app = app
 
+video_url = st.text_input("Put the youtube url")
+
+if video_url and is_valid_youtube_url(video_url):
+    pass
+else:
+    st.error("invalid youtube url")
+    st.stop()
 
 st.video(app.video, start_time=0)
 
