@@ -7,7 +7,12 @@ import openai
 from dataclasses_json import dataclass_json, LetterCase
 from openai.types.beta import Thread
 
-from config.constants import VIDEO_PATH, OPENAI_API_KEY, OPENAI_ORGANIZATION_ID
+from config.constants import (
+    VIDEO_PATH,
+    OPENAI_API_KEY,
+    OPENAI_ORGANIZATION_ID,
+    OPENAI_ASSISTANT_ID,
+)
 from config.log import setup_log
 
 
@@ -31,7 +36,7 @@ class App:
 
     thread: Thread = None
 
-    assistant_id: str = "asst_frmjonf13TDEk4WIzDWwZNVN"  # TODO: access from config or..
+    assistant_id: str = OPENAI_ASSISTANT_ID  # TODO: access from config or..
 
     def __post_init__(self):
         setup_log()
