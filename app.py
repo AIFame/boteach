@@ -11,6 +11,9 @@ st.set_page_config(
     page_icon=":books:",
 )
 
+client = openai
+
+# sidebar() TODO: import from views/..
 st.sidebar.header("Configuration")
 api_key = st.sidebar.text_input("Enter your OpenAI API key", type="password")
 if api_key:
@@ -30,10 +33,7 @@ st.video(app.video, start_time=app.start_time)
 
 # sidebar() TODO:
 
-if "conversation" not in st.session_state:
-    st.session_state.conversation = None
-if "chat_history" not in st.session_state:
-    st.session_state.chat_history = []
+thread = client.beta.threads.create()
 
 st.header("Q/A Genie")  # FIXME:
 user_question = st.text_input("Ask a question about the video:")
@@ -41,6 +41,16 @@ user_question = st.text_input("Ask a question about the video:")
 
 if user_question:
     # handle_userinput(user_question)
+
+    client.beta.threads.messages.create(
+        thread_id=thread.id, role="user", content=user_question
+    )
+
+    # run = client.beta.threads.runs.create(
+    #     thread_id=st.session_state.thread_id,
+    #     assistant_id=assistant_id,
+    #     instructions="Please answer the queries using the knowledge provided in the files.When adding other information mark it clearly as such.with a different color",
+    # )
 
     with st.spinner("LLM Processing"):
         response = app.chain({"question": user_question})
@@ -56,6 +66,8 @@ if user_question:
         st.write("Here is the video snip that should clarify your doubts")
         app.start_time = random.randint(1, 600)  # FIXME:
         st.video(app.video, start_time=app.start_time)
+        
+
 
 
 # Define a function to answer a question about a video
