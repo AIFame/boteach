@@ -17,6 +17,7 @@ dataclasses-json = "^0.6.3"
 pytube = "^15.0.0"
 youtube-transcript-api = "^0.6.1"
 streamlit-player = "^0.1.5"
+gtts = "^2.4.0"
 
 
 [tool.poetry.group.dev.dependencies]
