@@ -4,16 +4,16 @@ from dataclasses import dataclass
 from typing import List
 
 import openai
-from dataclasses_json import dataclass_json
+from dataclasses_json import dataclass_json, LetterCase
 
 from config import open_ai
 from config.constants import VIDEO_PATH
 
 
-@dataclass_json
+@dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass
 class PromptAnswer:
-    videoTimestamps: List[str]
+    video_timestamps: List[str]
     answer: str
 
 
@@ -69,7 +69,11 @@ class App:
         ]
         logging.info(f"assistant_msgs:{assistant_messages_for_run}")
 
-        return assistant_messages_for_run[-1].value
+        answer = assistant_messages_for_run[-1].value
+
+        logging.info(f"answer {answer}")
+
+        return PromptAnswer.from_json(answer)
 
     @staticmethod
     def upload_to_openai(filepath):
