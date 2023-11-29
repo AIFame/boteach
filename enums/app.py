@@ -6,7 +6,6 @@ from typing import List
 import openai
 from dataclasses_json import dataclass_json, LetterCase
 
-from config import open_ai
 from config.constants import VIDEO_PATH
 
 
@@ -33,8 +32,6 @@ class App:
     assistant_id: str = "asst_frmjonf13TDEk4WIzDWwZNVN"  # TODO: access from config or..
 
     def __post_init__(self):
-        open_ai.setup()  # TODO: setup sidebar
-
         client = self.client
 
         self.thread = client.beta.threads.create()
