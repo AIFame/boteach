@@ -1,3 +1,4 @@
+import json
 import logging
 import time
 from dataclasses import dataclass
@@ -75,11 +76,17 @@ class App:
         ]
         logging.info(f"assistant_msgs:{assistant_messages_for_run}")
 
-        answer = assistant_messages_for_run[-1].content
+        answer = assistant_messages_for_run[-1]
 
         logging.info(f"answer {answer}")
 
-        return PromptAnswer.from_json(answer)
+        answer_text = answer.content[0].text.value
+
+        logging.info(f"answer text {answer_text}")
+
+        json.loads(answer_text)
+
+        return PromptAnswer.from_json(answer_text)
 
     @staticmethod
     def upload_to_openai(filepath):
