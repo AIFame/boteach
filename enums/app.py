@@ -1,12 +1,7 @@
-import logging
-import os
 from dataclasses import dataclass
 
-
 from config import open_ai
-from config.constants import INDEX_NAME, VIDEO_PATH
-
-import streamlit as st
+from config.constants import VIDEO_PATH
 
 
 @dataclass
