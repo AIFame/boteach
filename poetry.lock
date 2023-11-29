@@ -1590,6 +1590,20 @@ watchdog = { version = ">=2.1.5", markers = "platform_system != \"Darwin\"" }
 snowflake = ["snowflake-connector-python (>=2.8.0)", "snowflake-snowpark-python (>=0.9.0)"]
 
 [[package]]
+name = "streamlit-player"
+version = "0.1.5"
+description = "A streamlit component to embed video and music players from various websites."
+optional = false
+python-versions = ">=3.6"
+files = [
+    { file = "streamlit-player-0.1.5.tar.gz", hash = "sha256:7f27688fbdf6e385fd277cca00196e51a6e5cda7fc7c1a08098b0108508f5d0e" },
+    { file = "streamlit_player-0.1.5-py3-none-any.whl", hash = "sha256:69d635630293f0538983abbfb561feb31d3a11f1442ccf1d92c42303adfa8ff6" },
+]
+
+[package.dependencies]
+streamlit = ">=0.73"
+
+[[package]]
 name = "tenacity"
 version = "8.2.3"
 description = "Retry code until it succeeds"
@@ -1848,4 +1862,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "de0bcd74239ce38f126b1efda9bb2ba3920b79ffd898865b61361077a89e26b6"
+content-hash = "3faf3fc29edea2f6925b63b3b35cd0b0fe78d2a84f010a756ebd6e182a4a7001"
