@@ -48,9 +48,6 @@ class App:
 
         self.thread = client.beta.threads.create()
 
-        # TODO: upload transcript
-        # TODO: already upserted
-
     def process_question(self, user_question: str) -> PromptAnswer:
         client = self.client
         thread = self.thread
