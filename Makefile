@@ -42,7 +42,7 @@ clean:
 docker:
 	docker build -t  boteach .
 
-.PHONY: run install clean setup test activate docker
+.PHONY: run install clean setup test activate docker test
 
 poetry-export:
 	poetry export --with dev --format requirements.txt --output requirements-poetry.txt
