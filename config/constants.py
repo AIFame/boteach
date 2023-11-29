@@ -22,6 +22,10 @@ OPENAI_ORGANIZATION_ID: Final[str] = environ.get(
     "OPENAI_ORGANIZATION_ID",
     "",
 ).strip()
+OPENAI_ASSISTANT_ID: Final = environ.get(
+    "OPENAI_ASSISTANT_ID", "asst_frmjonf13TDEk4WIzDWwZNVN"
+).strip()
+# TODO: create assistants for every session
 OPENAI_EMBEDDINGS_LLM: Final[str] = os.getenv(
     "OPENAI_EMBEDDINGS_LLM",
     "text-embedding-ada-002",

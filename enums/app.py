@@ -1,20 +1,39 @@
-import os
+import logging
+import time
 from dataclasses import dataclass
 
-from icecream import ic
-from langchain.chains.conversational_retrieval.base import (
-    BaseConversationalRetrievalChain,
+import openai
+from dataclasses_json import dataclass_json, LetterCase
+from openai.types.beta import Thread
+
+from config.constants import (
+    VIDEO_PATH,
+    OPENAI_API_KEY,
+    OPENAI_ORGANIZATION_ID,
+    OPENAI_ASSISTANT_ID,
 )
-from langchain.embeddings import OpenAIEmbeddings
-from langchain.vectorstores.pinecone import Pinecone
+from config.log import setup_log
 
-from config import open_ai, pinecone
-from config.constants import INDEX_NAME, VIDEO_PATH
-from utils.ai.open_ai import create_or_get_conversation_chain, upsert
 
-import streamlit as st
+@dataclass_json(letter_case=LetterCase.CAMEL)
+@dataclass
+class PromptAnswer:
+    answer: str
+    start_video_timestamp: str
+    end_video_timestamp: str
 
-from utils.inputs.get_repo import get_video_transcript
+    @staticmethod
+    def timestamp_to_seconds(timestamp) -> int:
+        h, m, s = map(float, timestamp.split(":"))
+        return int(h * 3600 + m * 60 + s)
+
+    @property
+    def start_time(self):
+        return self.timestamp_to_seconds(self.start_video_timestamp)
+
+    @property
+    def end_time(self):
+        return self.timestamp_to_seconds(self.end_video_timestamp)
 
 
 @dataclass
@@ -25,26 +44,67 @@ class App:
 
     start_time: int = 0
     video = VIDEO_PATH
-    chain: BaseConversationalRetrievalChain = None
+    client: openai = openai
+    transcript: str = ""
+
+    thread: Thread = None
+
+    assistant_id: str = OPENAI_ASSISTANT_ID  # TODO: access from config or..
 
     def __post_init__(self):
-        open_ai.setup()
-        pinecone.setup()
+        setup_log()
 
-        embeddings = OpenAIEmbeddings()
-        vectorstore = Pinecone.from_existing_index(
-            index_name=INDEX_NAME,
-            embedding=embeddings,
-            # namespace=TODO:
+        openai.api_key = OPENAI_API_KEY
+        openai.organization = OPENAI_ORGANIZATION_ID
+
+        client = self.client
+
+        self.thread = client.beta.threads.create()
+
+    def process_question(self, user_question: str) -> PromptAnswer:
+        client = self.client
+        thread = self.thread
+        msg = client.beta.threads.messages.create(
+            thread_id=self.thread.id, role="user", content=user_question
         )
-
-        self.chain = create_or_get_conversation_chain(
-            vectorstore,
+        logging.info(f"msg:${msg}")
+        run = client.beta.threads.runs.create(
+            thread_id=thread.id,
+            assistant_id=self.assistant_id,
+            # instructions="Please answer the queries using the knowledge provided in the files.When adding other information mark it clearly as such.with a different color"
         )
+        logging.info(f"run:${run}")
 
-        doc = get_video_transcript()
+        while run.status != "completed":
+            time.sleep(1)
+            run = client.beta.threads.runs.retrieve(thread_id=thread.id, run_id=run.id)
+            logging.debug(f"run:${run}")
 
-        ic(f"text_chunks are generated and the total chucks are {len(doc)}")
+        messages = client.beta.threads.messages.list(thread_id=thread.id)
+        assistant_messages_for_run = [
+            message
+            for message in messages
+            if message.run_id == run.id and message.role == "assistant"
+        ]
+        logging.info(f"assistant_msgs:{assistant_messages_for_run}")
 
-        print("Doc is ready for upsert!")
-        upsert(doc)
+        answer = assistant_messages_for_run[-1]
+
+        logging.info(f"answer {answer}")
+
+        answer_text = answer.content[0].text.value
+
+        answer_text = answer_text.lstrip("```json")
+        answer_text = answer_text.rstrip("```")
+
+        logging.info(f"answer text {answer_text}")
+
+        return PromptAnswer.from_json(answer_text)
+
+    @staticmethod
+    def upload_to_openai(filepath):
+        # TODO: migrate to utils/inputs
+        """Upload a file to OpenAI and return its file ID."""
+        with open(filepath, "rb") as file:
+            response = openai.files.create(file=file.read(), purpose="assistants")
+        return response.id
