@@ -4,11 +4,13 @@ from dataclasses import dataclass
 from typing import List
 
 import openai
+from dataclasses_json import dataclass_json
 
 from config import open_ai
 from config.constants import VIDEO_PATH
 
 
+@dataclass_json
 @dataclass
 class PromptAnswer:
     videoTimestamps: List[str]

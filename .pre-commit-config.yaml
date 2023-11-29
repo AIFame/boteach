@@ -42,3 +42,14 @@ repos:
     hooks:
       - id: black
         language_version: python3.10
+
+  #TODO: replace all above with ruff
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    # Ruff version.
+    rev: v0.1.6
+    hooks:
+      # Run the linter.
+      - id: ruff
+        args: [ --fix ]
+      # Run the formatter.
+      - id: ruff-format
