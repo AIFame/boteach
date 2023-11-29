@@ -2,7 +2,6 @@ import logging
 import random
 
 import streamlit as st
-from langchain.embeddings import OpenAIEmbeddings
 
 from enums.app import App
 from public import tpl_bot
@@ -30,9 +29,8 @@ if "conversation" not in st.session_state:
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
 
-st.header("Q/A Genie") # FIXME:
+st.header("Q/A Genie")  # FIXME:
 user_question = st.text_input("Ask a question about the video:")
-
 
 
 if user_question:
@@ -56,10 +54,8 @@ if user_question:
         st.write(message)
 
         st.write("Here is the video snip that should clarify your doubts")
-        app.start_time = random.randint(1,600) #FIXME:
+        app.start_time = random.randint(1, 600)  # FIXME:
         st.video(app.video, start_time=app.start_time)
-
-
 
 
 # Define a function to answer a question about a video
