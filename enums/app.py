@@ -81,6 +81,9 @@ class App:
 
         answer_text = answer.content[0].text.value
 
+        answer_text = answer_text.lstrip("```json")
+        answer_text = answer_text.rstrip("```")
+
         logging.info(f"answer text {answer_text}")
 
         return PromptAnswer.from_json(answer_text)
