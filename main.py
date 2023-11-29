@@ -1,6 +1,5 @@
 import logging
 
-import pytube
 import streamlit as st
 from pytube import YouTube
 
@@ -41,7 +40,7 @@ if not app:
 video_url = st.text_input("Put the youtube url")
 
 if video_url and is_valid_youtube_url(video_url):
-    pass
+    logging.info(f"valid youtube url: {video_url}")
 else:
     st.error("invalid youtube url")
     st.stop()
