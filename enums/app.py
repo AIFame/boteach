@@ -1,4 +1,3 @@
-import json
 import logging
 import time
 from dataclasses import dataclass
@@ -83,8 +82,6 @@ class App:
         answer_text = answer.content[0].text.value
 
         logging.info(f"answer text {answer_text}")
-
-        json.loads(answer_text)
 
         return PromptAnswer.from_json(answer_text)
 
