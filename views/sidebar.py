@@ -4,12 +4,11 @@ from icecream import ic
 from config.constants import VIDEO_PATH
 from database.pinecone_db import need_text_embedding
 from utils.ai.open_ai import get_text_chunk, upsert
-from utils.inputs.get_repo import get_video_transcript
+from utils.inputs.get_video_transcript import get_video_transcript
 
 
 def sidebar_spinner():
     with st.spinner("Processing"):
-
         if not need_text_embedding():
             st.write(
                 "Index existed in Pinecone database. Skip text embedding. You can ask question directly.",
