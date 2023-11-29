@@ -4,7 +4,6 @@ import random
 import streamlit as st
 
 from enums.app import App
-from public import tpl_bot
 
 st.set_page_config(
     page_title="Boteach",
@@ -36,7 +35,7 @@ user_question = st.text_input("Ask a question about the video:")
 if user_question:
     # handle_userinput(user_question)
 
-    with st.spinner("LLM Working"):
+    with st.spinner("LLM Processing"):
         response = app.chain({"question": user_question})
 
     with st.chat_message("ai", avatar="assistant"):
@@ -44,13 +43,7 @@ if user_question:
         print(f"response: {response}")
         message = chat_history_list[-1].content
         print(f"message: {message}")
-        # st.write(
-        #     tpl_bot.replace(
-        #         "{{MSG}}",
-        #         message,
-        #     ),
-        #     unsafe_allow_html=True,
-        # )
+
         st.write(message)
 
         st.write("Here is the video snip that should clarify your doubts")
