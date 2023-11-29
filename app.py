@@ -1,6 +1,7 @@
 import logging
 import random
 
+import openai
 import streamlit as st
 
 from enums.app import App
@@ -9,6 +10,12 @@ st.set_page_config(
     page_title="Boteach",
     page_icon=":books:",
 )
+
+st.sidebar.header("Configuration")
+api_key = st.sidebar.text_input("Enter your OpenAI API key", type="password")
+if api_key:
+    openai.api_key = api_key
+
 
 st.title("Botech")
 
