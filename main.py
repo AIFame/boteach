@@ -29,8 +29,6 @@ if not app:
 
 st.video(app.video, start_time=app.start_time)
 
-# sidebar() TODO:
-
 
 st.header("Q/A Genie")  # FIXME:
 user_question = st.text_input("Ask a question about the video:")
@@ -43,40 +41,4 @@ if user_question:
         with st.chat_message("ai", avatar="assistant"):
             st.write(response.answer)
 
-    # with st.chat_message("ai", avatar="assistant"):
-    #     chat_history_list = response["chat_history"]
-    #     print(f"response: {response}")
-    #     message = chat_history_list[-1].content
-    #     print(f"message: {message}")
-    #
-    #     st.write(message)
-    #
-    #     st.write("Here is the video snip that should clarify your doubts")
-    #     app.start_time = random.randint(1, 600)  # FIXME:
-    #     st.video(app.video, start_time=app.start_time)
-
-
-# Define a function to answer a question about a video
-# def answer_question(question, video_url):
-#     # Get the video snip of the explanation
-#     video_snip =
-#
-#     # Answer the question using the QA model
-#     answer = qa_model.answer(question, video_snip)
-#
-#     # Return the answer and the video snip
-#     return answer, video_snip
-
-
-# Set the title of the app
-
-# Display the video
-
-# Ask the user a question about the video
-
-# Answer the question and display the video snip
-# if question:
-#     answer, video_snip = answer_question(question, video_url)
-#
-#     st.write(answer)
-#     st.image(video_snip)
+        st.video(app.video, start_time=0)
