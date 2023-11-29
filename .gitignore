@@ -67,5 +67,7 @@ You can modify this file as per your specific requirements.
 
 #*.zip
 
-/samples/sample_v3/linear-regression.ipynb.html
-/samples/vehicle_solution/vehicle-dataset.html
+logs/*
+*.log
+
+
