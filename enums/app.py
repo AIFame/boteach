@@ -6,7 +6,7 @@ from typing import List
 import openai
 from dataclasses_json import dataclass_json, LetterCase
 
-from config.constants import VIDEO_PATH
+from config.constants import VIDEO_PATH, OPENAI_API_KEY, OPENAI_ORGANIZATION_ID
 
 
 @dataclass_json(letter_case=LetterCase.CAMEL)
@@ -32,6 +32,9 @@ class App:
     assistant_id: str = "asst_frmjonf13TDEk4WIzDWwZNVN"  # TODO: access from config or..
 
     def __post_init__(self):
+        openai.api_key = OPENAI_API_KEY
+        openai.organization = OPENAI_ORGANIZATION_ID
+
         client = self.client
 
         self.thread = client.beta.threads.create()
