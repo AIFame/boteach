@@ -27,7 +27,7 @@ if not app:
     st.session_state.app = app
 
 
-st.video(app.video, start_time=app.start_time)
+st.video(app.video, start_time=0)
 
 
 st.header("Q/A Genie")  # FIXME:
