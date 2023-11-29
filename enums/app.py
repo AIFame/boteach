@@ -5,8 +5,10 @@ from typing import List
 
 import openai
 from dataclasses_json import dataclass_json, LetterCase
+from openai.types.beta import Thread
 
 from config.constants import VIDEO_PATH, OPENAI_API_KEY, OPENAI_ORGANIZATION_ID
+from config.log import setup_log
 
 
 @dataclass_json(letter_case=LetterCase.CAMEL)
@@ -27,11 +29,13 @@ class App:
     client: openai = openai
     transcript: str = ""
 
-    thread: any = None
+    thread: Thread = None
 
     assistant_id: str = "asst_frmjonf13TDEk4WIzDWwZNVN"  # TODO: access from config or..
 
     def __post_init__(self):
+        setup_log()
+
         openai.api_key = OPENAI_API_KEY
         openai.organization = OPENAI_ORGANIZATION_ID
 
@@ -42,7 +46,7 @@ class App:
         # TODO: upload transcript
         # TODO: already upserted
 
-    def process_question(self, user_question: str) -> str:
+    def process_question(self, user_question: str) -> PromptAnswer:
         client = self.client
         thread = self.thread
         msg = client.beta.threads.messages.create(
@@ -69,7 +73,7 @@ class App:
         ]
         logging.info(f"assistant_msgs:{assistant_messages_for_run}")
 
-        answer = assistant_messages_for_run[-1].value
+        answer = assistant_messages_for_run[-1].content
 
         logging.info(f"answer {answer}")
 

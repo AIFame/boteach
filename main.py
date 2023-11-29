@@ -1,6 +1,5 @@
 import logging
 
-import openai
 import streamlit as st
 
 from enums.app import App
@@ -10,13 +9,12 @@ st.set_page_config(
     page_icon=":books:",
 )
 
-client = openai
 
 # sidebar() TODO: import from views/..
-st.sidebar.header("Configuration")
-api_key = st.sidebar.text_input("Enter your OpenAI API key", type="password")
-if api_key:
-    openai.api_key = api_key
+# st.sidebar.header("Configuration")
+# api_key = st.sidebar.text_input("Enter your OpenAI API key", type="password")
+# if api_key:
+#     openai.api_key = api_key
 
 
 st.title("Botech")
@@ -33,7 +31,6 @@ st.video(app.video, start_time=app.start_time)
 
 # sidebar() TODO:
 
-thread = client.beta.threads.create()
 
 st.header("Q/A Genie")  # FIXME:
 user_question = st.text_input("Ask a question about the video:")
@@ -42,6 +39,9 @@ user_question = st.text_input("Ask a question about the video:")
 if user_question:
     with st.spinner("LLM Processing"):
         response = app.process_question(user_question)
+
+        with st.chat_message("ai", avatar="assistant"):
+            st.write(response.answer)
 
     # with st.chat_message("ai", avatar="assistant"):
     #     chat_history_list = response["chat_history"]
