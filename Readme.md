@@ -23,18 +23,21 @@ Students classified to
     1. We are not trying to replace human teachers
     2. We are trying to bridge the gap arises with students and human teachers.
 
-3. MVP v0.3
+3. MVP v0.3, v0.4
     - Expand our demo video -> 5 videos list
     - min: 90% accurate responses from AI in terms of lecture snip and prompt
 
-4. MVP v0.4
+4. MVP v0.5
+    - Add support for all youtube videos
+
+6. MVP v1.0
     - Role out RBAC (Role based Access control) to our beta users
     - Roles of users:
       i) Teacher- Upload video, and transcript. Evaluate
       ii) Learner- Search bar: to search for a lecture video and watch it and ask qs
-5. MVP v0.5
+7. MVP v1.2
     - Teacher Dashboard (see the video list, viewers etc)  Implementation: look for open source dashboards - PowerBI
 
-6. MVP v0.6
+8. MVP v1.3
    - AI Avatars powered by https://elevenlabs.io or https://studio.inworld.ai/
 ......
