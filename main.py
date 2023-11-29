@@ -41,4 +41,4 @@ if user_question:
         with st.chat_message("ai", avatar="assistant"):
             st.markdown(response.answer)
 
-        st.video(app.video, start_time=0)
+        st.video(app.video, start_time=response.start_time)
