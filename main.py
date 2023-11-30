@@ -1,6 +1,5 @@
 import logging
 
-import pytube
 import streamlit as st
 from pytube import YouTube
 
@@ -51,7 +50,7 @@ app.video = video_url
 st.video(app.video, start_time=0)
 
 
-st.header("Q/A Genie")  # FIXME:
+st.header("Q/A Genie")
 user_question = st.text_input("Ask a question about the video:")
 
 
