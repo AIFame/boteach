@@ -3,6 +3,7 @@ import logging
 import streamlit as st
 from pytube import YouTube
 
+from config.constants import DEVELOPMENT, MODE
 from enums.app import App
 from views.sidebar import sidebar
 
@@ -27,8 +28,8 @@ sidebar()
 
 
 app: App = st.session_state.get("app")
-app = None  # FIXME
-if not app:
+
+if not app or MODE == DEVELOPMENT:
     app = App()
     logging.info("creating new app instance")
     st.session_state.app = app
