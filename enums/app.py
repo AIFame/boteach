@@ -1,9 +1,9 @@
 import logging
 import time
 from dataclasses import dataclass
+from typing import Final
 
 import openai
-from dataclasses_json import dataclass_json, LetterCase
 from openai.types.beta import Thread
 from youtube_transcript_api import YouTubeTranscriptApi
 from youtube_transcript_api.formatters import SRTFormatter
@@ -14,27 +14,9 @@ from config.constants import (
     OPENAI_ASSISTANT_ID,
 )
 from config.log import setup_log
+from enums.promptAnswer import PromptAnswer
 
-
-@dataclass_json(letter_case=LetterCase.CAMEL)
-@dataclass
-class PromptAnswer:
-    answer: str
-    start_video_timestamp: str
-    end_video_timestamp: str
-
-    @staticmethod
-    def timestamp_to_seconds(timestamp) -> int:
-        h, m, s = map(float, timestamp.split(":"))
-        return int(h * 3600 + m * 60 + s)
-
-    @property
-    def start_time(self):
-        return self.timestamp_to_seconds(self.start_video_timestamp)
-
-    @property
-    def end_time(self):
-        return self.timestamp_to_seconds(self.end_video_timestamp)
+DEFAULT_VIDEO: Final = "https://www.youtube.com/watch?v=cd_KQbf-j_w"
 
 
 @dataclass
