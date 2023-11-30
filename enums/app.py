@@ -5,6 +5,7 @@ from dataclasses import dataclass
 import openai
 from dataclasses_json import dataclass_json, LetterCase
 from openai.types.beta import Thread
+from youtube_transcript_api import YouTubeTranscriptApi
 
 from config.constants import (
     OPENAI_API_KEY,
@@ -100,6 +101,13 @@ class App:
 
         return PromptAnswer.from_json(answer_text)
 
+    @property
+    def video_id(self) -> str:
+        from pytube import extract
+
+        video_id = extract.video_id(self.video)
+        return video_id
+
     @staticmethod
     def upload_to_openai(filepath):
         # TODO: migrate to utils/inputs
@@ -108,7 +116,11 @@ class App:
             response = openai.files.create(file=file.read(), purpose="assistants")
         return response.id
 
-    # def get_transcript(self):
+    def get_transcript(self):
+        transcript = YouTubeTranscriptApi.get_transcript(
+            self.video_id, languages=["en"]
+        )
+        logging.info(transcript)
 
     def link_chain(self, file_id: str):
         assistant_file = self.client.beta.assistants.files.create(
