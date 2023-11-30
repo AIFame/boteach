@@ -60,8 +60,9 @@ class App:
         logging.info(f"video set:{youtube_url}")
 
         srt = self.get_subtitles()
-        with BytesIO() as b:
-            b.write(srt)
+
+        bytes_io = BytesIO(srt.encode("utf-8"))
+        openai.files.create(file=bytes_io, purpose="assistants")
 
     def process_question(self, user_question: str) -> PromptAnswer:
         client = self.client
