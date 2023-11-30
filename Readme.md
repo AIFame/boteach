@@ -45,4 +45,5 @@ Students classified to
 ## TODO
 
 - [ ]  Explore various youtube videos
-- 
+- [ ] Separate assistants for every video
+- [ ] Backup assistant ids in redis with respect to video
