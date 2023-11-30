@@ -107,3 +107,11 @@ class App:
         with open(filepath, "rb") as file:
             response = openai.files.create(file=file.read(), purpose="assistants")
         return response.id
+
+    # def get_transcript(self):
+
+    def link_chain(self, file_id: str):
+        assistant_file = self.client.beta.assistants.files.create(
+            assistant_id=self.assistant_id, file_id=file_id
+        )
+        logging.info(assistant_file)
