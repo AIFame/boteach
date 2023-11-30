@@ -1,6 +1,7 @@
 import logging
 import time
 from dataclasses import dataclass
+from io import BytesIO
 from typing import Final
 
 import openai
@@ -15,6 +16,7 @@ from config.constants import (
 )
 from config.log import setup_log
 from enums.promptAnswer import PromptAnswer
+from utils.helpers_youtube import is_valid_youtube_url
 
 DEFAULT_VIDEO: Final = "https://www.youtube.com/watch?v=cd_KQbf-j_w"
 
@@ -26,7 +28,7 @@ class App:
     """
 
     start_time: int = 0
-    video: str = "https://www.youtube.com/watch?v=cd_KQbf-j_w"
+    _video: str = "https://www.youtube.com/watch?v=cd_KQbf-j_w"
     client: openai = openai
     transcript: str = ""  # TODO:
 
@@ -43,6 +45,23 @@ class App:
         client = self.client
 
         self.thread = client.beta.threads.create()
+
+    @property
+    def video(self) -> str:
+        return self._video or DEFAULT_VIDEO
+
+    @video.setter
+    def video(self, youtube_url: str):
+        if not is_valid_youtube_url(youtube_url):
+            logging.warning("invalid youtube url")
+            return
+
+        self._video = youtube_url
+        logging.info(f"video set:{youtube_url}")
+
+        srt = self.get_subtitles()
+        with BytesIO() as b:
+            b.write(srt)
 
     def process_question(self, user_question: str) -> PromptAnswer:
         client = self.client
@@ -99,7 +118,7 @@ class App:
             response = openai.files.create(file=file.read(), purpose="assistants")
         return response.id
 
-    def get_subtitles(self):
+    def get_subtitles(self) -> str:
         transcript = YouTubeTranscriptApi.get_transcript(
             self.video_id, languages=["en"]
         )

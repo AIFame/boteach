@@ -1,21 +1,11 @@
 import logging
 
 import streamlit as st
-from pytube import YouTube
 
 from config.constants import DEVELOPMENT, MODE
 from enums.app import App
+from utils.helpers_youtube import is_valid_youtube_url
 from views.sidebar import sidebar
-
-
-def is_valid_youtube_url(url):
-    try:
-        YouTube(url)
-        return True
-    except Exception as e:
-        logging.exception(f"youtube url {e.__str__()}")
-        return False
-
 
 st.set_page_config(
     page_title="Boteach",
