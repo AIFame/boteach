@@ -11,7 +11,8 @@ class PromptAnswer:
     end_video_timestamp: str
 
     @staticmethod
-    def timestamp_to_seconds(timestamp) -> int:
+    def timestamp_to_seconds(timestamp: str) -> int:
+        timestamp, ms = timestamp.split(",")
         h, m, s = map(float, timestamp.split(":"))
         return int(h * 3600 + m * 60 + s)
 

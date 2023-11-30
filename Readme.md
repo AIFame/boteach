@@ -39,5 +39,10 @@ Students classified to
     - Teacher Dashboard (see the video list, viewers etc)  Implementation: look for open source dashboards - PowerBI
 
 8. MVP v1.3
-   - AI Avatars powered by https://elevenlabs.io or https://studio.inworld.ai/
-......
+    - AI Avatars powered by https://elevenlabs.io or https://studio.inworld.ai/
+      ......
+
+## TODO
+
+- [ ]  Explore various youtube videos
+- 
