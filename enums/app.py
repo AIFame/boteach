@@ -6,6 +6,7 @@ import openai
 from dataclasses_json import dataclass_json, LetterCase
 from openai.types.beta import Thread
 from youtube_transcript_api import YouTubeTranscriptApi
+from youtube_transcript_api.formatters import SRTFormatter
 
 from config.constants import (
     OPENAI_API_KEY,
@@ -116,11 +117,15 @@ class App:
             response = openai.files.create(file=file.read(), purpose="assistants")
         return response.id
 
-    def get_transcript(self):
+    def get_subtitles(self):
         transcript = YouTubeTranscriptApi.get_transcript(
             self.video_id, languages=["en"]
         )
-        logging.info(transcript)
+        logging.debug(transcript[:10])
+
+        formatter = SRTFormatter()
+
+        return formatter.format_transcript(transcript)
 
     def link_chain(self, file_id: str):
         assistant_file = self.client.beta.assistants.files.create(
