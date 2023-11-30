@@ -7,7 +7,6 @@ from dataclasses_json import dataclass_json, LetterCase
 from openai.types.beta import Thread
 
 from config.constants import (
-    VIDEO_PATH,
     OPENAI_API_KEY,
     OPENAI_ORGANIZATION_ID,
     OPENAI_ASSISTANT_ID,
@@ -43,9 +42,9 @@ class App:
     """
 
     start_time: int = 0
-    video = VIDEO_PATH
+    video: str = "https://www.youtube.com/watch?v=cd_KQbf-j_w"
     client: openai = openai
-    transcript: str = ""
+    transcript: str = ""  # TODO:
 
     thread: Thread = None
 
