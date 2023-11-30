@@ -62,7 +62,8 @@ class App:
         srt = self.get_subtitles()
 
         bytes_io = BytesIO(srt.encode("utf-8"))
-        openai.files.create(file=bytes_io, purpose="assistants")
+        uploaded_file = openai.files.create(file=bytes_io, purpose="assistants")
+        self.link_chain(uploaded_file.id)
 
     def process_question(self, user_question: str) -> PromptAnswer:
         client = self.client
@@ -133,4 +134,4 @@ class App:
         assistant_file = self.client.beta.assistants.files.create(
             assistant_id=self.assistant_id, file_id=file_id
         )
-        logging.info(assistant_file)
+        logging.info(f"Linked {assistant_file}")
