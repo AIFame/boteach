@@ -38,7 +38,7 @@ if not app:
     logging.info("creating new app instance")
     st.session_state.app = app
 
-video_url = st.text_input("Paste the youtube url of your lesson")
+video_url = st.text_input("Paste the youtube url of your lesson", value=app.video)
 
 if video_url and is_valid_youtube_url(video_url):
     logging.info(f"valid youtube url: {video_url}")
