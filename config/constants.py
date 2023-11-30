@@ -13,10 +13,6 @@ DEVELOPMENT: Final[str] = "dev"
 TESTING: Final[str] = "test"
 MODE: Final[str] = os.getenv("mode", PRODUCTION)
 
-PINECONE_API_KEY: Final[str] = environ["PINECONE_API_KEY"].strip()
-PINECONE_API_ENV: Final[str] = environ["PINECONE_API_ENV"].strip()
-INDEX_NAME: Final[str] = environ.get("PINECONE_INDEX_NAME", APP_NAME)
-
 OPENAI_API_KEY: Final[str] = environ["OPENAI_API_KEY"].strip()
 OPENAI_ORGANIZATION_ID: Final[str] = environ.get(
     "OPENAI_ORGANIZATION_ID",
