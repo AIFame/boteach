@@ -59,6 +59,7 @@ if user_question:
         response = app.process_question(user_question)
 
         with st.chat_message("ai", avatar="assistant"):
+            # response.answer = response.answer.replace("[7†source]", "") FIXME: not working
             st.markdown(response.answer)
 
         st.video(app.video, start_time=response.start_time)
