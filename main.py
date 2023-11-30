@@ -28,7 +28,7 @@ st.set_page_config(
 #     openai.api_key = api_key
 
 
-st.title("Botech")
+st.title("Boteach")
 
 app: App = st.session_state.get("app")
 app = None  # FIXME
