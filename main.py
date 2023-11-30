@@ -4,6 +4,7 @@ import streamlit as st
 from pytube import YouTube
 
 from enums.app import App
+from views.sidebar import sidebar
 
 
 def is_valid_youtube_url(url):
@@ -20,15 +21,10 @@ st.set_page_config(
     page_icon=":books:",
 )
 
-
-# sidebar() TODO: import from views/..
-# st.sidebar.header("Configuration")
-# api_key = st.sidebar.text_input("Enter your OpenAI API key", type="password")
-# if api_key:
-#     openai.api_key = api_key
-
-
 st.title("Boteach")
+
+sidebar()
+
 
 app: App = st.session_state.get("app")
 app = None  # FIXME
