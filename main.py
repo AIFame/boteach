@@ -39,9 +39,9 @@ st.video(app.video, start_time=0)
 
 st.header("Q/A Genie")
 user_question = st.text_input("Ask a question about the video:")
+submitted = st.button("Submit", type="secondary")
 
-
-if user_question and st.button("Submit", type="secondary"):
+if user_question and submitted:
     with st.spinner("LLM Processing"):
         response = app.process_question(user_question)
 
